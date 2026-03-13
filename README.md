@@ -18,6 +18,7 @@ Fonctionne sur :
 
 ## Structure du rôle
 
+```
 mon_roles_apache1/
 ├── defaults/
 │   └── main.yml
@@ -35,7 +36,7 @@ mon_roles_apache1/
 └── tests/
     ├── inventory
     └── test.yml
-    
+``` 
 text## Variables principales (defaults/main.yml)
 
 | Variable                     | Description                                  | Valeur par défaut             |
