@@ -17,7 +17,8 @@ Fonctionne sur :
 - Tags disponibles pour exécuter uniquement certaines parties
 
 ## Structure du rôle
-webapp/
+
+mon_roles_apache1/
 ├── defaults/
 │   └── main.yml
 ├── handlers/
@@ -25,15 +26,16 @@ webapp/
 ├── meta/
 │   └── main.yml
 ├── tasks/
-│   ├── main.yml
 │   ├── dependencies.yml
 │   ├── docker.yml
+│   ├── main.yml
 │   └── webapp.yml
 ├── templates/
 │   └── index.html.j2
 └── tests/
-├── inventory
-└── test.yml
+    ├── inventory
+    └── test.yml
+    
 text## Variables principales (defaults/main.yml)
 
 | Variable                     | Description                                  | Valeur par défaut             |
