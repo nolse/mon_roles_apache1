@@ -1,0 +1,23 @@
+
+---
+
+# 🧹 `.gitignore` — propre et adapté à un rôle Ansible
+
+Crée un fichier `.gitignore` à la racine :
+
+```gitignore
+# Fichiers Ansible
+*.retry
+
+# Python
+__pycache__/
+*.pyc
+
+# Éditeurs
+*.swp
+*.swo
+.DS_Store
+
+# Molecule (si ajouté plus tard)
+.molecule/
+

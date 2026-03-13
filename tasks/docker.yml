@@ -1,0 +1,36 @@
+---
+# Vérifie si Docker est installé.
+# Dans un environnement Docker-in-Docker, le binaire peut ne pas exister,
+# mais le socket Docker sera présent. On ignore l'erreur volontairement.
+- name: Check if docker is installed
+  command: which docker
+  register: docker_check
+  ignore_errors: true
+
+# Installation du repo Docker CE uniquement si Docker n'est pas présent.
+- name: Install Docker CE repo
+  yum_repository:
+    name: docker-ce
+    description: Docker CE Stable
+    baseurl: https://download.docker.com/linux/centos/7/x86_64/stable
+    gpgcheck: yes
+    gpgkey: https://download.docker.com/linux/centos/gpg
+  when: docker_check.rc != 0
+
+# Installation de Docker CE si nécessaire.
+# Dans un environnement DinD, cette étape sera skip ou ok sans effet.
+- name: Install Docker CE
+  package:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    state: present
+  when: docker_check.rc != 0
+
+# Message informatif si Docker est déjà installé.
+- name: Debug docker status
+  debug:
+    msg: "Docker already installed, skipping service management."
+  when: docker_check.rc == 0
+

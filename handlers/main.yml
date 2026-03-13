@@ -1,0 +1,8 @@
+---
+# Handler déclenché si le template HTML change.
+# Redémarre proprement le conteneur webapp.
+- name: restart webapp container
+  docker_container:
+    name: "{{ webapp_container_name }}"
+    state: restarted
+

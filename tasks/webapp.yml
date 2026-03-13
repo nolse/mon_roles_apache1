@@ -1,0 +1,16 @@
+---
+- name: Copy website file template
+  template:
+    src: "{{ webapp_index_src }}"
+    dest: "{{ webapp_index_dest }}"
+    owner: "{{ webapp_user }}"
+    mode: '0644'
+
+- name: Run Apache container
+  docker_container:
+    name: "{{ webapp_container_name }}"
+    image: "{{ webapp_image }}"
+    ports:
+      - "{{ webapp_http_port }}:80"
+    volumes:
+      - "{{ webapp_index_dest }}:/usr/local/apache2/htdocs/index.html"

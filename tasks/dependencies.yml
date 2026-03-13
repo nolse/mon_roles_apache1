@@ -1,0 +1,32 @@
+---
+# Installation des dépendances nécessaires au rôle.
+# EPEL, git, wget → utilitaires de base.
+# pip → nécessaire pour installer docker-py (module Python utilisé par Ansible).
+
+- name: Install EPEL repo and tools
+  package:
+    name: "{{ item }}"
+    state: present
+  when: ansible_distribution == "CentOS"
+  loop:
+    - epel-release
+    - git
+    - wget
+
+# Récupération du script d'installation de pip (Python 2.7)
+- name: Download pip script
+  get_url:
+    url: https://bootstrap.pypa.io/pip/2.7/get-pip.py
+    dest: /tmp/get-pip.py
+
+# Installation de pip si absent
+- name: Install python-pip
+  command: python2.7 /tmp/get-pip.py
+  args:
+    creates: /usr/bin/pip
+
+# Installation du module docker-py utilisé par Ansible pour gérer les conteneurs
+- name: Install docker python module
+  pip:
+    name: docker-py
+

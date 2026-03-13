@@ -1,0 +1,15 @@
+---
+# Fichier principal du rôle : il orchestre les sous-tâches.
+# Chaque include est tagué pour permettre une exécution ciblée.
+
+- include_tasks: dependencies.yml
+  tags:
+    - deps     # Installation des dépendances système et Python
+
+- include_tasks: docker.yml
+  tags:
+    - docker   # Vérification/installation de Docker si nécessaire
+
+- include_tasks: webapp.yml
+  tags:
+    - webapp   # Déploiement de l'application web dans un conteneur

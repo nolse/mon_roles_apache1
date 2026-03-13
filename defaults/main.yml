@@ -1,0 +1,12 @@
+---
+# Variables par défaut du rôle.
+# Elles peuvent être surchargées dans un playbook ou un inventaire.
+
+webapp_user: admin                       # Propriétaire du fichier HTML
+webapp_index_src: index.html.j2          # Template source
+webapp_index_dest: "/home/{{ webapp_user }}/index.html"  # Fichier généré
+
+webapp_container_name: webapp            # Nom du conteneur
+webapp_image: httpd                      # Image Docker utilisée
+webapp_http_port: "80"                   # Port exposé
+

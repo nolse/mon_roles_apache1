@@ -1,0 +1,7 @@
+---
+- name: Test role webapp
+  hosts: prod
+  become: true
+
+  roles:
+    - webapp
